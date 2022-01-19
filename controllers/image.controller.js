@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const Images = mongoose.model('images');
 const router = express.Router();
 const upload = require("../s3");
+const auth = require("../middleware/auth");
+
 
 
 

@@ -24,5 +24,6 @@ const conn = mongoose.connect(mongoURI, options, (err) => {
 });
 
 require("../model/images.model");
+require("../model/user.model");
 
 exports.connection = conn;
