@@ -23,6 +23,6 @@ const conn = mongoose.connect(mongoURI, options, (err) => {
   }
 });
 
-require("./images.model");
+require("../model/images.model");
 
 exports.connection = conn;
