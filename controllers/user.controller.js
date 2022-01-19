@@ -40,8 +40,8 @@ router.post("/register", async (req, res) => {
       user.token = token;
   
       res.status(201).json(user);
-    } catch (error) {
-        res.status(400).send(error)
+    } catch (err) {
+      console.log(err);
     }
   });
 
@@ -69,8 +69,8 @@ router.post("/register", async (req, res) => {
         res.status(200).json(user);
       }
       res.status(400).send("Invalid Credentials");
-    } catch (error) {
-        res.status(400).send(error)
+    } catch (err) {
+      console.log(err);
     }
   });
 module.exports = router;

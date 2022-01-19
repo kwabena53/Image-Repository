@@ -8,16 +8,38 @@ const auth = require("../middleware/auth");
 
 
 
-router.get('/images', async(req, res)=>{
-
+router.get('/user/images', auth, async(req, res)=>{
     try {
-       const images =  await Images.find({})
+        //for any filter eg. public, private
+        let queryImages = {}
+        if(req.query){
+            queryImages = req.query
+        }
+        //auth user images
+        const user_id = req.user.user_id
+        queryImages["userId"] = user_id
+
+       const images =  await Images.find(queryImages)
        if(images){
-        res.status(200).json(images)
+        return res.status(200).json(images)
        }
-       res.status(400).send("Invalid request");
+      return res.status(400).send("Invalid request")
+       
     } catch (error) {
-        res.status(400).send(error)
+        console.log(error)
+    }
+});
+
+router.get('/images', async(req, res)=>{
+    try {
+       const images =  await Images.find({type :"PUBLIC"})
+       if(images){
+        return res.status(200).json(images)
+       }
+      return res.status(400).send("Invalid request")
+       
+    } catch (error) {
+        console.log(error)
     }
 });
 
@@ -40,22 +62,38 @@ router.get('/image/like',(req, res)=>{
             })       
 })
 
-router.post('/upload', upload.single('image'), async(req, res)=>{
+router.post('/user/upload', auth, upload.single('image'), async(req, res)=>{
     try {
         const savedImage = await Images.create({
             ...req.body,
-            image_url: req.file.location
+            image_url: req.file.location,
+            userId: req.user.user_id
         })
         if(savedImage){
-            res.status(200).send(savedImage)
+            return res.status(200).send(savedImage)
         }
-        res.status(400).send(savedImage);
+       return res.status(400).send(savedImage);
 
     } catch (error) {
-        res.status(400).send(error)
+        console.log(error)
     }   
 });
 
+router.post('/upload/public', upload.single('image'), async(req, res)=>{
+    try {
+        const savedImage = await Images.create({
+            ...req.body,
+            image_url: req.file.location,
+        })
+        if(savedImage){
+            return res.status(200).send(savedImage)
+        }
+       return res.status(400).send(savedImage);
+
+    } catch (error) {
+        console.log(error)
+    }   
+});
 
 
 module.exports = router;

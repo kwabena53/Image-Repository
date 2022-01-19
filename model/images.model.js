@@ -18,12 +18,15 @@ const schemaOptions = {
     },
     type: {
         type: String,
-        enum : ['public','private'],
-        default: 'public',
+        enum : ['PUBLIC','PRIVATE'],
+        default: 'PUBLIC',
     },
     likes: {
         type: Number,
         default:0
+    },
+    userId: {
+        type: mongoose.ObjectId,
     },
    
 }, schemaOptions);
