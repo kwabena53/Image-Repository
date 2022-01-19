@@ -7,21 +7,23 @@ const schemaOptions = {
   const imageSchema = new mongoose.Schema({
     title:{
         type: String,
-        required: 'First name is required'
+        required: 'title is required'
     },
     tags:{
         type: String,
-        required: 'Last name is required'
     },
     image_url: {
         type: String,
-        enum : ['public','private'],
-        default: 'public',
+        required: 'image is required'
     },
     type: {
         type: String,
         enum : ['public','private'],
         default: 'public',
+    },
+    likes: {
+        type: Number,
+        default:0
     },
    
 }, schemaOptions);
