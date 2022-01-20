@@ -51,7 +51,7 @@ router.post("/register", async (req, res) => {
       const { email, password } = req.body;
   
       if (!(email && password)) {
-        res.status(400).send("All input is required");
+        return res.send({error: "All input is required"});
       }
       const user = await User.findOne({ email });
   
@@ -66,9 +66,9 @@ router.post("/register", async (req, res) => {
   
         user.token = token;
   
-        res.status(200).json(user);
+        return res.json({data: user});
       }
-      res.status(400).send("Invalid Credentials");
+      return res.send({error:"Invalid Credentials"});
     } catch (err) {
       console.log(err);
     }

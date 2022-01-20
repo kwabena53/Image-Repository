@@ -28,6 +28,9 @@ const schemaOptions = {
     userId: {
         type: mongoose.ObjectId,
     },
+    likedUsers:{
+        type: Object,
+    }
    
 }, schemaOptions);
 
