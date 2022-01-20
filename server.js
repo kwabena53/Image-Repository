@@ -11,7 +11,15 @@ const userController = require("./controllers/user.controller");
 
 // app.use(express.urlencoded({ extended: true }))
 
-app.listen(port, () => console.log(`Listening on port ${port}`)); 
+if (process.env.NODE_ENV === 'production') {
+    // Serve any static files
+    app.use(express.static(path.join(__dirname, 'client/build')));
+  // Handle React routing, return all requests to React app
+    app.get('*', function(req, res) {
+      res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    });
+  }
+
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({
       extended: true,
@@ -25,4 +33,15 @@ app.get('/express_backend', (req, res) => {
 }); 
 
 app.use( '/api/user', userController);
+
+if (process.env.NODE_ENV === 'production') {
+    // Serve any static files
+    app.use(express.static(path.join(__dirname, 'client/build')));
+  // Handle React routing, return all requests to React app
+    app.get('*', function(req, res) {
+      res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    });
+  }
+app.listen(port, () => console.log(`Listening on port ${port}`)); 
+
 // app.use(['/api', '/'], imageController);

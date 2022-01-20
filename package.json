@@ -26,5 +26,6 @@
   },
   "devDependencies": {
     "concurrently": "^7.0.0"
-  }
+  },
+  "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
 }

@@ -14,12 +14,12 @@ router.post("/register", async (req, res) => {
       const { full_name, email, password } = req.body;
   
       if (!(email && password && full_name)) {
-        res.status(400).send("All input is required");
+        res.send({error:"All input is required"});
       }
       const existingUser = await User.findOne({ email });
   
       if (existingUser) {
-        return res.status(409).send("User with email already exist. Try logging in!");
+        return res.send({error:"User with email already exist. Try logging in!"});
       }
   
       encryptedPassword = await bcrypt.hash(password, 10);
@@ -39,7 +39,7 @@ router.post("/register", async (req, res) => {
       );
       user.token = token;
   
-      res.status(201).json(user);
+      return res.json(user);
     } catch (err) {
       console.log(err);
     }
