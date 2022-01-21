@@ -1,7 +1,6 @@
-# Spacetagram - Using NASA's APOD API
+# Image Repository Hub
 
-This is a mini-project that uses the [NASA's Astronomy Photo of the day (APOD) API](https://api.nasa.gov/) to show the APOD for the last 7 days.
-The app using React, Redux for state management, React hooks, localstorage for persisting data and other helper libraries
+This is a project that allw
 
 ## Feature
 - The app can get the NASA APOD for the last 7 days
