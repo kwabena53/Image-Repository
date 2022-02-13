@@ -1,0 +1,25 @@
+
+@import '~antd/dist/antd.css';
+.container{
+  /* max-width: 500px; */
+  padding: 3%;
+  margin: auto;
+}
+
+.subPara{
+  font-size: 13px;
+  color: gray;
+}
+
+.cardList{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 30px;
+  row-gap: 20px;
+}
+
+.contentArea{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
